@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>TaskTrove</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/portfolio.css" rel="stylesheet">
+    <style>
+        .dropdown-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #00B98E;
+            box-shadow: 0 0 10px #00B98E;
+            border-radius: 20px;
+            padding: 20px;
+            background-color: #f7f7f7;
+            margin-bottom: 20px;
+        }
+
+        .custom-dropdown {
+            text-align: center;
+            color: #12354d;
+            font-size: 18px;
+            background-color: #e5e5e5;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            width: 300px;
+            margin-bottom: 20px;
+            transform: skew(-10deg);
+        }
+
+        .fields-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f7f7f7;
+            border: 2px solid #00B98E;
+            box-shadow: 0 0 10px #00B98E;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .input-field {
+            text-align: center;
+            color: #12354d;
+            background-color: #e5e5e5;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            width: 300px;
+            margin-bottom: 10px;
+            transform: skew(-5deg);
+        }
+
+        .btn-primary {
+            background-color: #00B98E;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 15px 30px;
+            font-size: 18px;
+            margin-top: 20px;
+            transform: skew(-5deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- Navbar Start -->
+        <div class="container-fluid nav-bar bg-transparent">
+            <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
+                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
+                    <div class="icon p-2 me-2">
+                        <img class="img-fluid" src="img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
+                    </div>
+                    <h1 class="m-0 text-primary">TaskTrove</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto">
+                        <a href="index.html" class="nav-item nav-link">Home</a>
+                        <a href="post.html" class="nav-item nav-link">Post Job</a>
+                        <a href="published.html" class="nav-item nav-link">Published</a>
+                        <a href="portfilio.html" class="nav-item nav-link active">Portfolio</a>
+                        <a href="#" id="logoutLink" class="nav-item nav-link">LogOut</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Navbar End -->
+
+        <!-- Header Start -->
+        <div class="container-fluid header bg-white p-0">
+            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+                <div class="col-md-6 p-5 mt-lg-5">
+                    <div class="container1">
+                        <div class="dropdown-container">
+                            <div type="text" class="form-control">
+                                <p id="existingAmount" style="text-align: center; font-size: larger;">$</p>
+                            </div>
+                            <div class="link-container">
+                                <a href="Operation.html" class="custom-link">Click here to see operation</a>
+                            </div>
+                            <select id="choices" class="custom-dropdown" onchange="showFields()">
+                                <option style="text-align: center; color: #12354d;" value="">Choose Your Payment Method</option>
+                                <option value="optionA">CARD</option>
+                                <option value="optionB">Bank Account</option>
+                            </select>
+                        </div>
+
+                        <div id="optionAFields" class="fields-container" style="display: none;">
+                            <p style="padding: 15px; text-align: center; color: #0E2E50;"><b>Enter Your Card Information</b></p>
+                            <input id="amountA" class="input-field" type="text" placeholder="Amount"><br><br>
+                            <input id="operationTypeA" class="input-field" type="text" placeholder="Operation Type"><br><br>
+                            <input id="cardIdA" class="input-field" type="text" placeholder="Card ID"><br><br>
+                            <input id="expirationDateA" class="input-field" type="text" placeholder="Expiration"><br><br>
+                            <input id="CVVcodeA" class="input-field" type="text" placeholder="CVV code"><br><br>
+                            <input id="cardUserA" class="input-field" type="text" placeholder="Card User"><br><br>
+                            <a href="#" onclick="addOperation('A')" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">Save</a>
+                        </div>
+                        
+                        <div id="optionBFields" class="fields-container" style="display: none;">
+                            <p style="padding: 15px; text-align: center; color: #0E2E50;"><b>Enter Your Bank Account Information</b></p>
+                            <input id="amountB" class="input-field" type="text" placeholder="Amount"><br><br>
+                            <input id="operationTypeB" class="input-field" type="text" placeholder="Operation Type"><br><br>
+                            <input id="bankNameB" class="input-field" type="text" placeholder="Bank Name"><br><br>
+                            <input id="accountIdB" class="input-field" type="text" placeholder="Account ID"><br><br>
+                            <input id="transferDateB" class="input-field" type="text" placeholder="Transfer Date"><br><br>
+                            <a href="#" onclick="addOperation('B')" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">Save</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 animated fadeIn">
+                    <div class="owl-carousel-item">
+                        <img class="img-fluid" src="img/s11.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    
+        <br><br>
+
+        <!-- Footer Start -->
+        <div class="container">
+            <div class="copyright">
+                <div class="row"> 
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">TaskTrove</a>, What You Deserve Thanks For Your Trust. 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    
+    <!-- SweetAlert JavaScript Library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    
+    <!-- Custom Javascript -->
+    <script>
+        function showFields() {
+            var selectedValue = document.getElementById("choices").value;
+            document.getElementById("optionAFields").style.display = selectedValue === "optionA" ? "block" : "none";
+            document.getElementById("optionBFields").style.display = selectedValue === "optionB" ? "block" : "none";
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var token = localStorage.getItem('token');
+            if (token) {
+                fetch('http://127.0.0.1:8000/api/showMyPortfolio', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.existingAmount !== undefined) {
+                        document.getElementById('existingAmount').textContent = `${data.existingAmount} $`;
+                    } else {
+                        throw new Error('Invalid response format');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching portfolio:', error);
+                    alert('Error fetching portfolio: ' + error.message);
+                });
+            } else {
+                alert('No token found, please login.');
+                window.location.href = 'login.html';
+            }
+        });
+
+        function addOperation(option) {
+            var token = localStorage.getItem('token');
+            var amount = document.getElementById(`amount${option}`).value;
+            var operationType = document.getElementById(`operationType${option}`).value;
+            var cardId = option === 'A' ? document.getElementById(`cardId${option}`).value : null;
+            var expirationDate = option === 'A' ? document.getElementById(`expirationDate${option}`).value : null;
+            var CVVcode = option === 'A' ? document.getElementById(`CVVcode${option}`).value : null;
+            var cardUser = option === 'A' ? document.getElementById(`cardUser${option}`).value : null;
+            var bankName = option === 'B' ? document.getElementById(`bankName${option}`).value : null;
+            var accountId = option === 'B' ? document.getElementById(`accountId${option}`).value : null;
+            var transferDate = option === 'B' ? document.getElementById(`transferDate${option}`).value : null;
+
+            fetch('http://127.0.0.1:8000/api/Addoperation', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    amount: amount,
+                    operationType: operationType,
+                    cardId: cardId,
+                    expirationDate: expirationDate,
+                    CVVcode: CVVcode,
+                    cardUser: cardUser,
+                    bankName: bankName,
+                    accountId: accountId,
+                    transferDate: transferDate
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);
+                } else {
+                    throw new Error('Invalid response format');
+                }
+            })
+            .catch(error => {
+                console.error('Error adding operation:', error);
+                alert('Error adding operation: ' + error.message);
+            });
+        }
+
+        document.getElementById('logoutLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You will be logged out!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#00B98E',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, log out!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    localStorage.removeItem('token');
+                    Swal.fire(
+                        'Logged Out!',
+                        'You have been logged out successfully.',
+                        'success'
+                    ).then(() => {
+                        window.location.href = 'login.html';
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

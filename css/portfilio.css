@@ -1,0 +1,115 @@
+.container1  {
+    background-color: #daede6; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+
+    
+  }
+
+  .dropdown-container {
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-control {
+    border: 2px solid #00B98E;
+    box-shadow: 0 0 10px #00B98E;
+    border-radius: 40px;
+    padding: 10px;
+    text-align: center;
+    font-size: larger;
+    width: 100%;
+}
+.custom-dropdown {
+    width: 80%;
+    padding: 15px;
+    border: 2px solid #00B98E;
+    border-radius: 40px;
+    box-shadow: 0 0 10px #00B98E;
+    appearance: none;
+    text-align: center;
+    color: #12354d;
+    margin-top: 10px;
+    font-size: 18px;
+    background-color: #f9f9f9;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon fill="#00B98E" points="0,0 10,10 20,0"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.custom-dropdown:hover {
+    border-color: #007a5e;
+    box-shadow: 0 0 15px #007a5e;
+}
+.custom-dropdown:focus {
+    border-color: #00B98E;
+    box-shadow: 0 0 10px #00B98E;
+    outline: none;
+}
+.link-container {
+    text-align: center;
+    margin-top: 40px; /* Adjust this value to change the space between the select and the link */
+}
+.custom-link {
+    text-decoration: none;
+    color: #fff;
+    background-color: #00B98E;
+    padding: 10px 20px;
+    border-radius: 40px;
+    box-shadow: 0 0 10px #00B98E;
+    display: inline-block;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+.custom-link:hover {
+    background-color: #007a5e;
+    box-shadow: 0 0 15px #007a5e;
+}
+
+
+
+    select.custom-dropdown {
+        padding: 10px 35px;
+        border: 1px solid #140101; /* لون الحد */
+        border-radius: 15px; /* تقريب الزوايا */
+        background-color: #f8f8f89e; /* لون الخلفية */
+        cursor: pointer; /* تغيير المؤشر عند المرور عليها */
+        font-size: 16px; /* حجم الخط */
+        outline: none; /* إلغاء التوضيح عند الانتقاء */
+        margin-bottom: 20px; /* المسافة السفلية */
+        width: 400px; /* عرض القائمة المنسدلة */
+        transition: .2s ease;
+      border: 2px solid #00B98E;
+    box-shadow: 0 0 15px #00B98E ;
+      }
+    
+      /* تغير ستايل الخيارات عند الوقوف عليها بالماوس */
+      select.custom-dropdown:hover {
+        background-color: #e9e9e9; /* تغير لون الخلفية عند الوقوف عليها بالماوس */
+        border-color: #888; /* تغير لون الحد */
+      }
+    
+     
+      .fields-container {
+        padding: 10px;
+        margin-top: 240px;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+    
+      .visible {
+        display: block;
+        opacity: 1;
+      }
+
+      
+
+      
+
+      
+      

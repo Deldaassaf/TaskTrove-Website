@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="loginStyle.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>TaskTrove</title>
+</head>
+<body>
+    <div class="wrapper">
+        <span class="bg-animate"></span>
+        <span class="bg-animate2"></span>
+        <div class="form-box login">
+            <h2 class="animation" style="--i:0;">Login</h2>
+            <form id="login-form" action="#">
+                <div class="input_box animation" style="--i:1;">
+                    <input id="login-email" type="email" required>
+                    <label>Email</label>
+                    <i class='bx bxs-envelope'></i>
+                </div>
+                <div class="input_box animation" style="--i:2;">
+                    <input id="login-password" type="password" required>
+                    <label>Password</label>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <button id="login-button" type="button" class="btn animation" style="--i:3;">Login</button>
+                <div class="logreg-link animation" style="--i:4;">
+                    <p>Don't have an account? <a href="#" class="register-link">Sign-Up</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2 class="animation" style="--i:17; --j:0;">Sign Up</h2>
+            <form id="register-form" action="#">
+                <div class="input_box animation" style="--i:18;--j:1;">
+                    <input id="register-username" type="text" required>
+                    <label>Username</label>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input_box animation" style="--i:19; --j:2;">
+                    <input id="register-email" type="email" required>
+                    <label>Email</label>
+                    <i class='bx bxs-envelope'></i>
+                </div>
+                <div class="input_box animation" style="--i:20; --j:3;">
+                    <input id="register-phone" type="text" required>
+                    <label>Phone</label>
+                    <i class='bx bx-phone'></i>
+                </div>
+                <div class="input_box animation" style="--i:21; --j:4;">
+                    <input id="register-password" type="password" required>
+                    <label>Password</label>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <button id="signup-button" type="button" class="btn animation" style="--i:22;">Sign Up</button>
+                <div class="logreg-link animation" style="--i:23;">
+                    <p>Already have an account? <a href="#" class="login-link">login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-button').addEventListener('click', function() {
+            var email = document.getElementById('login-email').value;
+            var password = document.getElementById('login-password').value;
+
+            fetch('http://127.0.0.1:8000/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: email, password: password })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(errorInfo => Promise.reject(errorInfo));
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                localStorage.setItem('token', data.access_token);
+
+                return fetch('http://127.0.0.1:8000/api/check-profile', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${data.access_token}`
+                    }
+                });
+            })
+            .then(response => response.json())
+            .then(profileData => {
+                if (profileData.hasProfile) {
+                    window.location.href = 'index.html';
+                } else {
+                    window.location.href = 'AddProfile.html';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Login error: ' + JSON.stringify(error));
+            });
+        });
+
+        document.getElementById('signup-button').addEventListener('click', function() {
+            var username = document.getElementById('register-username').value;
+            var email = document.getElementById('register-email').value;
+            var phone = document.getElementById('register-phone').value;
+            var password = document.getElementById('register-password').value;
+
+            fetch('http://127.0.0.1:8000/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name: username, email: email, mobile: phone, password: password })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(errorInfo => Promise.reject(errorInfo));
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                localStorage.setItem('token', data.access_token);
+                window.location.href = 'login.html'; // Redirect to login page
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Registration error: ' + JSON.stringify(error));
+            });
+        });
+    </script>
+    <script src="LoginJS.js"></script>
+</body>
+</html>
